@@ -4,7 +4,6 @@ public class Player {
   Player(Room position) {
     setPosition(position);
   }
-
   public Room getPosition() {
     return position;
   }

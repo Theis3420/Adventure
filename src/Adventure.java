@@ -14,47 +14,47 @@ public class Adventure {
   Player player = new Player(room1);
   Scanner in = new Scanner(System.in);
 
-  void connectRooms() {
+  public void connectRooms() {
+    room1.setThisRoom(room1);
+    room2.setThisRoom(room2);
+    room3.setThisRoom(room3);
+    room4.setThisRoom(room4);
+    room5.setThisRoom(room5);
+    room6.setThisRoom(room6);
+    room7.setThisRoom(room7);
+    room8.setThisRoom(room8);
+    room9.setThisRoom(room9);
+
     room1.setRoomEast(room2);
     room1.setRoomSouth(room4);
 
     room2.setRoomEast(room3);
-    room2.setRoomWest(room1);
 
-    room3.setRoomWest(room2);
     room3.setRoomSouth(room6);
 
-    room4.setRoomNorth(room1);
     room4.setRoomSouth(room7);
 
     room5.setRoomSouth(room8);
 
-    room6.setRoomNorth(room3);
     room6.setRoomSouth(room9);
 
-    room7.setRoomNorth(room4);
     room7.setRoomEast(room8);
 
-    room8.setRoomNorth(room5);
     room8.setRoomEast(room9);
-    room8.setRoomWest(room7);
-
-    room9.setRoomNorth(room6);
-    room9.setRoomWest(room8);
   }
   void move(String playerInput) {
     if (playerInput.equals("east") && player.getPosition().getRoomEast() != null) {
       player.setPosition(player.getPosition().getRoomEast());
-      roomDescription();
+      displayRoomDescription();
     } else if (playerInput.equals("west") && player.getPosition().getRoomWest() != null) {
       player.setPosition(player.getPosition().getRoomWest());
-      roomDescription();
+      displayRoomDescription();
     } else if (playerInput.equals("north") && player.getPosition().getRoomNorth() != null) {
       player.setPosition(player.getPosition().getRoomNorth());
-      roomDescription();
+      displayRoomDescription();
     } else if (playerInput.equals("south") && player.getPosition().getRoomSouth() != null) {
       player.setPosition(player.getPosition().getRoomSouth());
-      roomDescription();
+      displayRoomDescription();
     } else {
       System.out.println("You cannot go that way");
     }
@@ -66,19 +66,19 @@ public class Adventure {
   void help() {
     System.out.println("(1) To move around type a direction like \"North\" or East etc.\n(2) Type \"Look\" if you want to look around the room again \n(3) If you want to close the game type \"Exit\"\n(4) if you are stuck type \"Help\"");
   }
-  void roomDescription() {
+  void displayRoomDescription() {
     System.out.println(player.getPosition().getDescription());
   }
   void execute() {
     connectRooms();
     introduction();
-    roomDescription();
+    displayRoomDescription();
     while (true) {
       String playerInput = in.next().toLowerCase(Locale.ROOT);
       switch (playerInput) {
         case "east", "west", "north", "south" -> move(playerInput);
         case "help" -> help();
-        case "look" -> roomDescription();
+        case "look" -> displayRoomDescription();
         case "exit" -> {
           System.out.println("Exiting game.");
           System.exit(0);
@@ -86,7 +86,6 @@ public class Adventure {
       }
     }
   }
-
   public static void main(String[] args) {
     new Adventure().execute();
   }
