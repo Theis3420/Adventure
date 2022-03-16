@@ -1,4 +1,5 @@
 public class Map {
+    private Room startRoom;
     Room room1 = new Room("(Room 1) You see an empty room with two Doors, one leading East and another leading South");
     Room room2 = new Room("(Room 2) You see an empty room with two Doors, one leading East and another leading West");
     Room room3 = new Room("(Room 3) You see an empty room with two Doors, one leading West and another leading South");
@@ -8,6 +9,13 @@ public class Map {
     Room room7 = new Room("(Room 7) You see an empty room with two Doors, one leading North and another leading East");
     Room room8 = new Room("(Room 8) You see an empty room with three Doors, one leading East, one leading North and another leading West");
     Room room9 = new Room("(Room 9) You see an empty room with two Doors, one leading East and another leading North");
+
+    Map (){
+        this.startRoom = room1;
+    }
+    public Room getStartRoom() {
+        return startRoom;
+    }
     public void connectRooms() {
         room1.setThisRoom(room1);
         room2.setThisRoom(room2);
@@ -36,5 +44,4 @@ public class Map {
 
         room8.setRoomEast(room9);
     }
-
 }
