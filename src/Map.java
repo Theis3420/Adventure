@@ -13,9 +13,11 @@ public class Map {
     Map (){
         this.startRoom = room1;
     }
+
     public Room getStartRoom() {
         return startRoom;
     }
+
     public void connectRooms() {
         room1.setThisRoom(room1);
         room2.setThisRoom(room2);
