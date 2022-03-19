@@ -10,6 +10,12 @@ public class Map {
     Room room8 = new Room("(Room 8) You see an empty room with three Doors, one leading East, one leading North and another leading West");
     Room room9 = new Room("(Room 9) You see an empty room with two Doors, one leading East and another leading North");
 
+    Item torch = new Item("Torch");
+    Item axe = new Item("Axe");
+    Item key = new Item("Key");
+    Item shield = new Item("Shield");
+    Item sword = new Item("Sword");
+
     Map (){
         this.startRoom = room1;
     }
@@ -45,5 +51,13 @@ public class Map {
         room7.setRoomEast(room8);
 
         room8.setRoomEast(room9);
+    }
+
+    public void addItemsToRoom(){
+        room1.addItem(torch);
+        room2.addItem(axe);
+        room3.addItem(key);
+        room4.addItem(shield);
+        room5.addItem(sword);
     }
 }

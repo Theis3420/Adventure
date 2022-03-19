@@ -3,14 +3,39 @@ import java.util.Scanner;
 
 public class UserInterface {
     Scanner in = new Scanner(System.in);
+    StringBuilder sb = new StringBuilder();
 
     private Player player;
 
     UserInterface(Player player){
         this.player = player;
     }
-
-
+    public void displayPickup(String item) {
+        System.out.println("You just picked up a " + item);
+    }
+    public void displayDrop(String item) {
+        System.out.println("You just dropped a " + item);
+    }
+    public void displayInventory() {
+        System.out.println("You currently have these items in your inventory: ");
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            sb.append(player.getInventory().get(i).getName());
+            sb.append(" ");
+        }
+        System.out.println(String.valueOf(sb));
+    }
+    public void displayItems() {
+        if (player.getPosition().getItems().size() > 0) {
+            System.out.print("Lying in the room you see a ");
+            for (int i = 0; i < player.getPosition().getItems().size(); i++) {
+                if (i > 0) {
+                    System.out.print(" and a ");
+                }
+                System.out.print(player.getPosition().getItems().get(i).getName());
+            }
+            System.out.println();
+        }
+    }
     public void displayIntroduction() {
         System.out.println("You've entered the darkest Dungeon!");
         displayHelp();
