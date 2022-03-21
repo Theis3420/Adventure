@@ -11,11 +11,11 @@ Room (String description) {
   public void addItem(Item item) {
     this.items.add(item);
   }
-  public void removeItem(Item item) {
-    this.items.remove(item);
-  }
   public ArrayList<Item> getItems() {
     return this.items;
+  }
+  public String getItemName(int index) {
+    return getItems().get(index).getName();
   }
 
   public void setName(String name) {
