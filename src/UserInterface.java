@@ -19,6 +19,33 @@ public class UserInterface {
             System.out.println("You just dropped a " + item);
         }
     }
+    public void displayEat(String item){
+        if (item == null) {
+            System.out.println("You failed to eat anything");
+        } else {
+            System.out.println("You just ate a " + item);
+        }
+    }
+    public void displayEquip(String item){
+        if (item == null) {
+            System.out.println("You failed to equip anything");
+        } else {
+            System.out.println("You just equipped a " + item);
+        }
+    }
+    public void displayUnEquip(String item){
+        if (item == null) {
+            System.out.println("You failed to unequip anything");
+        } else {
+            System.out.println("You just unequipped a " + item);
+        }
+    }
+    public void displayHealthStatus(String healthStatus){
+        System.out.println("You are currently in " + healthStatus + " condition");
+    }
+    public void displayHealthPoints(Player player){
+        System.out.println("You have " + player.getHealthPoints() + " health points left");
+    }
     public void displayInventory(Player player) {
         System.out.println("You currently have these items in your inventory: ");
         for (int i = 0; i < player.getInventory().size(); i++) {

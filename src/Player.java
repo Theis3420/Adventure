@@ -4,6 +4,63 @@ import java.util.Locale;
 public class Player {
   private Room position;
   private ArrayList<Item> inventory = new ArrayList<>();
+  private int healthPoints;
+  private final int MAX_HEALTHPOINTS = 100, MIN_HEALTHPOINTS = 0;
+  private Item weapon;
+  private enum HealthStatus{
+    HEALTHY,
+    OK,
+    CRITICAL,
+    DEAD
+  }
+
+
+
+  Player(){
+    this.healthPoints = this.MAX_HEALTHPOINTS;
+  }
+  public String equipItem (String playerInput) {
+    for (int i = 0; i < getInventory().size(); i++) {
+      if (getInventory().get(i).getName().toLowerCase(Locale.ROOT).contains(playerInput.substring(6))) {
+        if (this.weapon != null){
+          this.inventory.add(this.weapon);
+        }
+        String itemName = getInventory().get(i).getName();
+        this.weapon = getInventory().get(i);
+        getInventory().remove(i);
+        return itemName;
+      }
+    }
+    return null;
+  }
+  public String unequipItem(){
+    inventory.add(this.weapon);
+    String itemName = this.weapon.getName();
+    this.weapon = null;
+    return itemName;
+  }
+
+  public void eat(Food food){
+
+    this.healthPoints += food.getHealthRestoration();
+    if (this.healthPoints > 100){
+      this.healthPoints = this.MAX_HEALTHPOINTS;
+    } else if (this.healthPoints < 1){
+
+    }
+  }
+  public String getHealthStatus(){
+
+    if (this.healthPoints > 75){
+      return HealthStatus.HEALTHY.name();
+    } else if (this.healthPoints > 25){
+      return HealthStatus.OK.name();
+    } else if (this.healthPoints > 1){
+      return HealthStatus.CRITICAL.name();
+    } else {
+      return HealthStatus.DEAD.name();
+    }
+  }
 
   public void addItem(Item item) {
     this.inventory.add(item);
@@ -33,6 +90,18 @@ public class Player {
     }
     return null;
   }
+  public String eatItem (String playerInput) {
+    for (int i = 0; i < getInventory().size(); i++) {
+      if (getInventory().get(i).getName().toLowerCase(Locale.ROOT).contains(playerInput.substring(4))) {
+        String itemName = getInventory().get(i).getName();
+        eat((Food)getInventory().get(i));
+        getInventory().remove(i);
+
+        return itemName;
+      }
+    }
+    return null;
+  }
 
   public boolean move(String playerInput) {
     if (playerInput.equals("east") && getPosition().getRoomEast() != null) {
@@ -56,4 +125,13 @@ public class Player {
   public void setPosition(Room position) {
     this.position = position;
   }
+
+  public void setHealthPoints(int healthPoints) {
+    this.healthPoints = healthPoints;
+  }
+
+  public int getHealthPoints() {
+    return healthPoints;
+  }
+
 }

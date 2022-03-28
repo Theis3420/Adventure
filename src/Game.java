@@ -36,12 +36,21 @@ public class Game {
         }
         case "inventory" -> ui.displayInventory(player);
         case "exit" -> gameRunning = false;
+        case "health" -> ui.displayHealthPoints(player);
       }
       if (playerInput.contains("take")) {
         ui.displayPickup(player.takeItem(playerInput));
       } else if (playerInput.contains("drop")) {
         ui.displayDrop(player.dropItem(playerInput));
+      } else if (playerInput.contains("eat")) {
+        ui.displayEat(player.eatItem(playerInput));
+        ui.displayHealthStatus(player.getHealthStatus());
+        ui.displayHealthPoints(player);
+      } else if (playerInput.contains("unequip")){
+          ui.displayUnEquip(player.unequipItem());
+      } else if (playerInput.contains("equip")){
+        ui.displayEquip(player.equipItem(playerInput));
+      }
       }
     }
   }
-}
