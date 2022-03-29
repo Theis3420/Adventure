@@ -11,18 +11,15 @@ public class Map {
     Room room7 = new Room("(Room 7) You see an empty room with two Doors, one leading North and another leading East");
     Room room8 = new Room("(Room 8) You see an empty room with three Doors, one leading East, one leading North and another leading West");
     Room room9 = new Room("(Room 9) You see an empty room with two Doors, one leading East and another leading North");
-/*
-    Item torch = new Item("Torch");
-    Item axe = new Item("Axe");
-    Item key = new Item("Key");
-    Item shield = new Item("Shield");
-    Item sword = new Item("Sword");
 
- */
     Item apple = new Food("Apple",10);
     Item poison = new Food("Poison",-50);
-    Item sword = new MeleeWeapon("Sword",10,100);
-    Item hammer = new MeleeWeapon("Hammer",20,100);
+    Item sword = new MeleeWeapon("Sword",10, false);
+    Item hammer = new MeleeWeapon("Hammer",20, false);
+    Item bow = new RangedWeapon("Bow", 20, true, 5);
+
+    Enemy zombie = new Enemy("Zombie", 20, hammer);
+
 
     Map (){
         this.startRoom = room1;
@@ -68,8 +65,13 @@ public class Map {
         room1.addItem(apple);
         room1.addItem(poison);
         room1.addItem(hammer);
+        room1.addItem(bow);
         //room3.addItem(key);
         //room4.addItem(shield);
         //room5.addItem(sword);
+    }
+
+    public void addEnemiestoRooms() {
+        room1.addEnemy(zombie);
     }
 }

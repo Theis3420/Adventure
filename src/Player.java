@@ -23,7 +23,7 @@ public class Player {
     for (int i = 0; i < getInventory().size(); i++) {
       if (getInventory().get(i).getName().toLowerCase(Locale.ROOT).contains(playerInput.substring(6))) {
         if (this.weapon != null){
-          this.inventory.add(this.weapon);
+          addItem(this.weapon);
         }
         String itemName = getInventory().get(i).getName();
         this.weapon = getInventory().get(i);
@@ -34,12 +34,29 @@ public class Player {
     return null;
   }
   public String unequipItem(){
-    inventory.add(this.weapon);
+    addItem(this.weapon);
     String itemName = this.weapon.getName();
     this.weapon = null;
     return itemName;
   }
-
+  public int attack () {
+    if (this.weapon == null) {
+      return 2;
+    }
+    else if (((Weapon)this.weapon).isRanged()) {
+      if (((RangedWeapon) this.weapon).getAmmo() < 0) {
+        return 0;
+      } else {
+        ((RangedWeapon) this.weapon).setAmmo(-1);
+        return ((Weapon) this.weapon).getDamage();
+      }
+    } else {
+      return ((Weapon) this.weapon).getDamage();
+    }
+  }
+  public void hit (int damage) {
+    this.healthPoints -= damage;
+  }
   public void eat(Food food){
 
     this.healthPoints += food.getHealthRestoration();
@@ -127,7 +144,7 @@ public class Player {
   }
 
   public void setHealthPoints(int healthPoints) {
-    this.healthPoints = healthPoints;
+    this.healthPoints += healthPoints;
   }
 
   public int getHealthPoints() {

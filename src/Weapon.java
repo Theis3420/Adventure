@@ -1,26 +1,23 @@
 public class Weapon extends Item{
 
-    private int durability, damage;
+    private int damage;
+    private boolean ranged;
 
-    Weapon(String name, int durability, int damage){
+    Weapon(String name, int damage, boolean ranged){
         super(name);
         this.damage = damage;
-        this.durability = durability;
+        this.ranged = ranged;
     }
 
     public int getDamage() {
         return damage;
     }
 
-    public int getDurability() {
-        return durability;
-    }
-
-    public void setDurability(int durability) {
-        this.durability = durability;
-    }
-
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public boolean isRanged() {
+        return ranged;
     }
 }
