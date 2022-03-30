@@ -1,8 +1,4 @@
-import java.util.Locale;
-import java.util.Scanner;
-
 public class UserInterface {
-    Scanner in = new Scanner(System.in);
 
     public void displayPickup(String item) {
         if (item == null) {
@@ -11,6 +7,7 @@ public class UserInterface {
             System.out.println("You just picked up a " + item);
         }
     }
+
     public void displayDrop(String item) {
         if (item == null) {
             System.out.println("You failed to drop anything");
@@ -18,6 +15,7 @@ public class UserInterface {
             System.out.println("You just dropped a " + item);
         }
     }
+
     public void displayAttack (int damageNum, Enemy enemy) {
         if (damageNum == 0) {
             System.out.println("Your ranged weapon has run out of ammunition");
@@ -27,12 +25,15 @@ public class UserInterface {
             System.out.println("You dealt " + damageNum + " damage to the " + enemy.getName());
         }
     }
+
     public void displayHit (Enemy enemy) {
         System.out.println("The " + enemy.getName() + " attacked you for " + enemy.attack() + " damage");
     }
+
     public void displayCombatMovevement() {
         System.out.println("You are unable to move between rooms while in combat");
     }
+
     public void displayDeath() {
         System.out.println("You died, Game Over.");
     }
@@ -40,6 +41,7 @@ public class UserInterface {
     public void displayEnemyDeath(Enemy enemy) {
         System.out.println("You have killed the " + enemy.getName());
     }
+
     public void displayEat(String item){
         if (item == null) {
             System.out.println("You failed to eat anything");
@@ -47,6 +49,7 @@ public class UserInterface {
             System.out.println("You just ate a " + item);
         }
     }
+
     public void displayEquip(String item){
         if (item == null) {
             System.out.println("You failed to equip anything");
@@ -54,6 +57,7 @@ public class UserInterface {
             System.out.println("You just equipped a " + item);
         }
     }
+
     public void displayUnEquip(String item){
         if (item == null) {
             System.out.println("You failed to unequip anything");
@@ -61,12 +65,15 @@ public class UserInterface {
             System.out.println("You just unequipped a " + item);
         }
     }
+
     public void displayHealthStatus(String healthStatus){
         System.out.println("You are currently in " + healthStatus + " condition");
     }
+
     public void displayHealthPoints(Player player){
         System.out.println("You have " + player.getHealthPoints() + " health points left");
     }
+
     public void displayInventory(Player player) {
         StringBuilder sb = new StringBuilder();
         System.out.println("You currently have these items in your inventory: ");
@@ -76,6 +83,7 @@ public class UserInterface {
         }
         System.out.println(String.valueOf(sb));
     }
+
     public void displayItems(Player player) {
         if (player.getPosition().getItems().size() > 0) {
             System.out.print("Lying in the room you see a ");
@@ -88,6 +96,7 @@ public class UserInterface {
             System.out.println();
         }
     }
+
     public void displayEnemies(Player player) {
         if (player.getPosition().getEnemies().size() == 0) {
             System.out.println("There are no enemies nearby");
@@ -95,6 +104,7 @@ public class UserInterface {
             System.out.println("There is a hostile " + player.getPosition().getEnemies().get(0).getName() + " in the room");
         }
     }
+
     public void displayIntroduction() {
         System.out.println("You've entered the darkest Dungeon!");
         displayHelp();
@@ -114,9 +124,5 @@ public class UserInterface {
 
     public void displayVictory(){
         System.out.println("You have completed the quest, congratulations!!!");
-    }
-
-    public String getPlayerInput(){
-        return in.next().toLowerCase(Locale.ROOT);
     }
 }

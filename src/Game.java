@@ -1,5 +1,3 @@
-import java.util.Locale;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
@@ -10,11 +8,8 @@ public class Game {
   UserInterface ui = new UserInterface();
   private boolean hasRespawned = false;
 
-
   public void execute() {
-    map.connectRooms();
-    map.addItemsToRoom();
-    map.addEnemiestoRooms();
+    map.createMap();
     player.setPosition(map.getStartRoom());
     ui.displayIntroduction();
     ui.displayRoomDescription(player);
@@ -87,6 +82,7 @@ public class Game {
         ui.displayAttack(-1, null);
       }
     }
+
     public Enemy firstEnemy() {
       return player.getPosition().getEnemies().get(0);
     }

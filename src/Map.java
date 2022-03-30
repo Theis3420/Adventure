@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Map {
     private Room startRoom;
+    //Creating rooms
     Room room1 = new Room("You enter a room with two Doors, one leading East and another leading South");
     Room room2 = new Room("You enter a room with two Doors, one leading East and another leading West");
     Room room3 = new Room("You enter a room with two Doors, one leading West and another leading South");
@@ -14,6 +15,7 @@ public class Map {
 
     ArrayList<Room> rooms = new ArrayList<>();
 
+    // Creating Food
     Item potion = new Food("Potion",20);
     Item apple = new Food("Apple",10);
     Item deadRat = new Food("Dead Rat",-50);
@@ -22,6 +24,7 @@ public class Map {
     Item bread = new Food("Bread", 15);
     Item holyGrail = new Food("Holy Grail", 2000);
 
+    // Creating Weapons
     Item sword = new MeleeWeapon("Sword",10, false);
     Item hammer = new MeleeWeapon("Hammer",20, false);
     Item divineSword = new MeleeWeapon("Divine Sword", 40, false);
@@ -30,6 +33,7 @@ public class Map {
     Item bow = new RangedWeapon("Bow", 20, true, 5);
     Item tomeOfMagicMissile = new RangedWeapon("Tome Of Magic Missile", 30,true,4);
 
+    // Creating Enemies
     Enemy zombie = new Enemy("Zombie", 20, sword);
     Enemy goblin = new Enemy("Goblin",15,hammer);
     Enemy skeleton = new Enemy("Skeleton", 40,sword);
@@ -110,6 +114,13 @@ public class Map {
         room7.addEnemy(goblin);
         room8.addEnemy(skeleton);
     }
+
+    public void createMap(){
+        connectRooms();
+        addItemsToRoom();
+        addEnemiestoRooms();
+    }
+
     public void respawnEnemy(){
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).getEnemies().isEmpty()){
