@@ -8,6 +8,7 @@ public class Game {
   Map map = new Map();
   Player player = new Player();
   UserInterface ui = new UserInterface();
+  private boolean hasRespawned = false;
 
 
   public void execute() {
@@ -34,7 +35,6 @@ public class Game {
           } else {
             ui.displayCombatMovevement();
           }
-
         }
         case "help" -> ui.displayHelp();
         case "look" -> {
@@ -49,6 +49,7 @@ public class Game {
       }
       if (playerInput.contains("take")) {
           ui.displayPickup(player.takeItem(playerInput));
+          respawnEnemies();
         } else if (playerInput.contains("drop")) {
           ui.displayDrop(player.dropItem(playerInput));
         } else if (playerInput.contains("eat")) {
@@ -63,6 +64,10 @@ public class Game {
       if (player.getHealthPoints() < 1) {
         gameRunning = false;
         ui.displayDeath();
+      }
+      if (player.getPosition() == map.room1 && player.isHasHolyGrail()){
+        gameRunning = false;
+        ui.displayVictory();
       }
     }
   }
@@ -84,5 +89,12 @@ public class Game {
     }
     public Enemy firstEnemy() {
       return player.getPosition().getEnemies().get(0);
+    }
+
+    public void respawnEnemies(){
+      if (player.isHasHolyGrail() && !hasRespawned){
+        hasRespawned = true;
+        map.respawnEnemy();
+      }
     }
   }

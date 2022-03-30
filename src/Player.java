@@ -13,7 +13,7 @@ public class Player {
     CRITICAL,
     DEAD
   }
-
+  private boolean hasHolyGrail = false;
 
 
   Player(){
@@ -57,13 +57,13 @@ public class Player {
   public void hit (int damage) {
     this.healthPoints -= damage;
   }
+
   public void eat(Food food){
 
     this.healthPoints += food.getHealthRestoration();
     if (this.healthPoints > 100){
       this.healthPoints = this.MAX_HEALTHPOINTS;
     } else if (this.healthPoints < 1){
-
     }
   }
   public String getHealthStatus(){
@@ -82,15 +82,20 @@ public class Player {
   public void addItem(Item item) {
     this.inventory.add(item);
   }
+
   public ArrayList<Item> getInventory() {
     return this.inventory;
   }
+
   public String takeItem(String playerInput) {
     for (int i = 0; i < getPosition().getItems().size(); i++) {
       if (getPosition().getItems().get(i).getName().toLowerCase(Locale.ROOT).contains(playerInput.substring(5))) {
         String itemName = getPosition().getItems().get(i).getName();
         addItem(getPosition().getItems().get(i));
         getPosition().getItems().remove(i);
+        if (itemName.equals("Holy Grail")){
+          this.hasHolyGrail = true;
+        }
         return itemName;
       }
     }
@@ -137,6 +142,10 @@ public class Player {
 
   public Room getPosition() {
     return position;
+  }
+
+  public boolean isHasHolyGrail() {
+    return hasHolyGrail;
   }
 
   public void setPosition(Room position) {

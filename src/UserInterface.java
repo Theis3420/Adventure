@@ -36,6 +36,7 @@ public class UserInterface {
     public void displayDeath() {
         System.out.println("You died, Game Over.");
     }
+
     public void displayEnemyDeath(Enemy enemy) {
         System.out.println("You have killed the " + enemy.getName());
     }
@@ -109,6 +110,10 @@ public class UserInterface {
 
     public void displayInvalidDirection(){
         System.out.println("You cannot go that way");
+    }
+
+    public void displayVictory(){
+        System.out.println("You have completed the quest, congratulations!!!");
     }
 
     public String getPlayerInput(){
